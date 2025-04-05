@@ -62,6 +62,56 @@ function [z,p,q,obs,shuff] = permutationZTest(v1,v2,varargin)
 %
 %   Example
 %   ---------
+%
+% figure
+% tiledlayout(2,2)
+% nexttile
+% N = 1000; 
+% % two groups, same variance, different means
+% v1 = normrnd(0,10,[N 1]);
+% v2 = normrnd(5,10,[N 1]);
+% % run a permutation test on the two groups, in each iteration compare the
+% % observed Cohen's d value to a shuffled distribution, in each shuffle draw
+% % values randomly with replacement
+% [z,p,q,obs,shuff] = permutationZTest(v1,v2,'method','cohen','iti',1000,'rep',1); 
+% boxplot([v1 v2])
+% title(sprintf('Cohen d: z = %.3f, p (two-sided) = %.3f, p (one-sided) = %.3f,%.3f',z,p,q(1),q(2)))
+% 
+% nexttile
+% N = 1000; 
+% % two groups, same variance, different means
+% v1 = normrnd(0,10,[N 1]);
+% v2 = normrnd(30,10,[N 1]);
+% % run a permutation test on the two groups, in each iteration compare the
+% % observed F-statistic value to a shuffled distribution, in each shuffle draw
+% % values randomly with replacement
+% [z,p,q,obs,shuff] = permutationZTest(v1,v2,'method','f','iti',1000,'rep',1); 
+% boxplot([v1 v2])
+% title(sprintf('f-statistic: z = %.3f, p (two-sided) = %.3f, p (one-sided) = %.3f,%.3f',z,p,q(1),q(2)))
+% 
+% nexttile
+% N = 1000; 
+% % two groups, different variance, different means
+% v1 = normrnd(0,10,[N 1]);
+% v2 = normrnd(10,30,[N 1]);
+% % run a permutation test on the two groups, in each iteration compare the
+% % observed F-statistic value to a shuffled distribution, in each shuffle draw
+% % values randomly with replacement
+% [z,p,q,obs,shuff] = permutationZTest(v1,v2,'method','f','iti',1000,'rep',1); 
+% boxplot([v1 v2])
+% title(sprintf('f-statistic: z = %.3f, p (two-sided) = %.3f, p (one-sided) = %.3f,%.3f',z,p,q(1),q(2)))
+% 
+% nexttile
+% N = 1000; 
+% % two groups, different variance, different means
+% v1 = normrnd(0,10,[N 1]);
+% v2 = normrnd(10,30,[N 1]);
+% % run a permutation test on the two groups, in each iteration compare the
+% % observed difference in means to a shuffled distribution, in each shuffle draw
+% % values randomly without replacement
+% [z,p,q,obs,shuff] = permutationZTest(v1,v2,'method','mean','iti',1000,'rep',0); 
+% boxplot([v1 v2])
+% title(sprintf('mean difference: z = %.3f, p (two-sided) = %.3f, p (one-sided) = %.3f,%.3f',z,p,q(1),q(2)))
 % 
 %   See also computeEffectSize, computeZProbability
 
@@ -153,32 +203,6 @@ function d = group_difference(g1,g2,method)
             error('Unknown test type... exiting')
     end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
