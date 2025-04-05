@@ -106,11 +106,7 @@ function [z,p,q,obs,shuff] = stats_perm_test(v1,v2,varargin)
     end
 
 %% >>>>>>>>>> Significance
-    z = (obs - mean(shuff,'all','omitnan')) / std(shuff,[],'all','omitnan'); % z-scored observed value
-    p = 2*normcdf(-abs(z)); % two-tailed probability of z-score
-    p(p==0) = eps;
-    q = [normcdf(z) normcdf(z,'upper')]; % left and right one-tailed probability of z-score
-    q(q==0) = eps;
+    [z,p,q] = stats_z_probability(obs,shuff);
 
 end
 

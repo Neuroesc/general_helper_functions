@@ -80,7 +80,9 @@ function [z,p,q] = stats_z_probability(obs,shuff)
 
     % calculate p-values based on these
     p = 2*normcdf(-abs(z)); % two-tailed probability of z-scores
+    p(p==0) = 1 / numel(shuff);    
     q = [normcdf(z); normcdf(z,'upper')]; % left and right one-tailed probability of z-scores
+    q(q==0) = 1 / numel(shuff);    
 
 
 
