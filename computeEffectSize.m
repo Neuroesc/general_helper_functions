@@ -1,11 +1,21 @@
-function e = stats_effect_size(v1,v2,varargin)
-%stats_effect_size calculate effect sizes between two groups
+function e = computeEffectSize(v1,v2,varargin)
+%computeEffectSize calculate effect sizes between two groups
 % Calculate effect sizes like Cohen's d and Hedge's g between
 % two groups.
 %
-%   e = stats_effect_size(v1,v2); calculates effect sizes for
+% USAGE
+%
+%   e = computeEffectSize(v1,v2); calculates effect sizes for
 %   the difference between group v1 and v2 which are output in
 %   structure e.
+%
+% INPUT
+%
+%   'v1' - Mx1, numeric, group 1 data
+%
+%   'v2' - Mx1, numeric, group 1 data
+%
+% OUTPUT
 %
 %   outputs included in e output structure:
 %
@@ -59,7 +69,7 @@ function e = stats_effect_size(v1,v2,varargin)
 %       the unbiased correction for Cohen's d.
 %
 %   2. In Glass's delta Cohen's d is calculated usind the standard deviation of
-%       the control group as a reference. In this function the second input, v1
+%       the control group as a reference. In this function the second input, v2
 %       is taken as the control group.
 %
 %   Example
@@ -67,17 +77,20 @@ function e = stats_effect_size(v1,v2,varargin)
 %
 %   v1 = normrnd(1,1,100,1); % input vector 1
 %   v2 = normrnd(10,1,100,1); % input vector 2
-%   e = stats_effect_size(v1,v2); % effect sizes
+%   e = computeEffectSize(v1,v2); % effect sizes
 % 
-%   See also ttest, ranksum
+%   See also permutationZTest, computeZProbability
 
 % HISTORY:
 % version 1.0.0, Release 18/11/23 Initial release
+% version 1.0.1, Release 05/04/25 Renamed from stats_effect_size, improved comments
 %
-% Author: Roddy Grieves
-% Dartmouth College, Moore Hall
-% eMail: roddy.m.grieves@dartmouth.edu
-% Copyright 2023 Roddy Grieves
+% AUTHOR 
+% Roddy Grieves
+% University of Glasgow, Sir James Black Building
+% Neuroethology and Spatial Cognition Lab
+% eMail: roddy.grieves@glasgow.ac.uk
+% Copyright 2025 Roddy Grieves
 
 %% >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Heading 3
 %% >>>>>>>>>>>>>>>>>>>> Heading 2

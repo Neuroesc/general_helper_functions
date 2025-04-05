@@ -1,15 +1,21 @@
-function [z,p,q,obs,shuff] = stats_perm_test(v1,v2,varargin)
-%stats_perm_test permutation test for two groups 
+function [z,p,q,obs,shuff] = permutationZTest(v1,v2,varargin)
+%permutationZTest permutation test for two groups 
 % Permutation test, with or without replacement, for two groups
 % A number of different statistical measures can be selected
 %
-%   [z,p,obs,shuff] = stats_perm_test(v1,v2) compute permutation z-test
+% USAGE
+%
+%   [z,p,obs,shuff] = permutationZTest(v1,v2) compute permutation z-test
 %   and probability of the difference between the two groups. Default
 %   measure is mean difference.
 %
-%   [z,p,obs,shuff] = stats_perm_test(__,name,value) process with Name-Value pairs 
+%   [z,p,obs,shuff] = permutationZTest(__,name,value) process with Name-Value pairs 
 %
-%   parameters include:
+% INPUT
+%
+%   'v1'            - Mx1, numeric, group 1 data
+%
+%   'v2'            - Mx1, numeric, group 1 data
 %
 %   'method'        -   String, method to use when testing difference between groups.
 %                       Select from: 'mean' (mean difference), 'median' (median difference),
@@ -26,7 +32,7 @@ function [z,p,q,obs,shuff] = stats_perm_test(v1,v2,varargin)
 %
 %                       Default value is 1.
 %
-%   outputs include:
+% OUTPUT
 %
 %   'z'             -   Float, z-score for observed group difference relative to the shuffles
 %
@@ -44,7 +50,7 @@ function [z,p,q,obs,shuff] = stats_perm_test(v1,v2,varargin)
 %
 %   Class Support
 %   -------------
-%   The input matrix in must be a real, non-sparse matrix of
+%   The input matrix v1 and v2 must be a real, non-sparse matrix of
 %   the following classes: uint8, int8, uint16, int16, uint32, int32,
 %   single or double.
 %
@@ -57,19 +63,19 @@ function [z,p,q,obs,shuff] = stats_perm_test(v1,v2,varargin)
 %   Example
 %   ---------
 % 
-%   See also NAME, NAME
+%   See also computeEffectSize, computeZProbability
 
 % HISTORY:
 % version 1.0.0, Release 18/11/23 Initial release
+% version 1.0.1, Release 05/04/25 Renamed from stats_perm_test, improved comments
 %
-% Author: Roddy Grieves
-% Dartmouth College, Moore Hall
-% eMail: roddy.m.grieves@dartmouth.edu
-% Copyright 2023 Roddy Grieves
+% AUTHOR 
+% Roddy Grieves
+% University of Glasgow, Sir James Black Building
+% Neuroethology and Spatial Cognition Lab
+% eMail: roddy.grieves@glasgow.ac.uk
+% Copyright 2025 Roddy Grieves
 
-%% >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Heading 3
-%% >>>>>>>>>>>>>>>>>>>> Heading 2
-%% >>>>>>>>>> Heading 1
 %% >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> INPUT ARGUMENTS CHECK
 %% Parse inputs
     p = inputParser;
@@ -106,7 +112,7 @@ function [z,p,q,obs,shuff] = stats_perm_test(v1,v2,varargin)
     end
 
 %% >>>>>>>>>> Significance
-    [z,p,q] = stats_z_probability(obs,shuff);
+    [z,p,q] = computeZProbability(obs,shuff);
 
 end
 
@@ -128,19 +134,19 @@ function d = group_difference(g1,g2,method)
             d = s{2,5};
 
         case {'cohen'} % Cohen's d
-            e = stats_effect_size(g1,g2);
+            e = computeEffectSize(g1,g2);
             d = e.cohen_d;
 
         case {'hedge'} % Hedge's g
-            e = stats_effect_size(g1,g2);
+            e = computeEffectSize(g1,g2);
             d = e.hedge_g;
 
         case {'cliff'}
-            e = stats_effect_size(g1,g2);
+            e = computeEffectSize(g1,g2);
             d = e.cliff_delta;
 
         case {'p_super'} % Probability of superiority
-            e = stats_effect_size(g1,g2);
+            e = computeEffectSize(g1,g2);
             d = e.probability_of_superiority;
 
         otherwise

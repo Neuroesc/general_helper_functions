@@ -1,12 +1,12 @@
-function [z,p,q] = stats_z_probability(obs,shuff)
-% stats_z_probability probability (p-value) from shuffle
+function [z,p,q] = computeZProbability(obs,shuff)
+% computeZProbability probability (p-value) from shuffle
 % given observed valuea and corresponding shuffle distributions this function
 % calculates the z-scored values and two-tailed probability (p-value) or, if
 % required the left and right one-tailed probability
 %
 % USAGE
 %
-% [z,p,q] = stats_z_probability(obs,shuff) 
+% [z,p,q] = computeZProbability(obs,shuff) 
 %
 % INPUT
 %
@@ -43,7 +43,7 @@ function [z,p,q] = stats_z_probability(obs,shuff)
 %
 % EXAMPLE
 % 
-% [z,p,q] = stats_z_probability(2,normrnd(0,1,1000,1));
+% [z,p,q] = computeZProbability(2,normrnd(0,1,1000,1));
 % The observed value provided here is 2
 % The shuffle provided is a normal distribution with a mean of 0 and a SD of 1
 % Thus, the observed value should be around the 95th percentile of the shuffle
@@ -60,13 +60,14 @@ function [z,p,q] = stats_z_probability(obs,shuff)
 % HISTORY
 %
 % version 1.0.0, Release 08/10/24 Initial release, previous copy lost
+% version 1.0.1, Release 05/04/25 Renamed from stats_z_probability, improved comments
 %
 % AUTHOR 
 % Roddy Grieves
 % University of Glasgow, Sir James Black Building
 % Neuroethology and Spatial Cognition Lab
 % eMail: roddy.grieves@glasgow.ac.uk
-% Copyright 2024 Roddy Grieves
+% Copyright 2025 Roddy Grieves
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INPUTS
 %%%%%%%%%%%%%%%% ARGUMENT CHECK
