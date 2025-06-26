@@ -77,15 +77,13 @@ function [z,p,q] = computeZProbability(obs,shuff)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTION BODY
     % z-score values relative to shuffles
-    z = (obs - mean(shuff,1,'omitmissing')) / std(shuff,[],1,'omitmissing'); % z-scored observed values
+    z = (obs - mean(shuff,1,'omitmissing')) ./ std(shuff,[],1,'omitmissing'); % z-scored observed values
 
     % calculate p-values based on these
     p = 2*normcdf(-abs(z)); % two-tailed probability of z-scores
-    p(p==0) = 1 / numel(shuff);    
+    p(p==0) = 1 ./ numel(shuff);    
     q = [normcdf(z); normcdf(z,'upper')]; % left and right one-tailed probability of z-scores
-    q(q==0) = 1 / numel(shuff);    
-
-
+    q(q==0) = 1 ./ numel(shuff);    
 
 
 
