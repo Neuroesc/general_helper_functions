@@ -33,20 +33,17 @@ function out = m_template(in,varargin)
 
 % HISTORY
 %
-% version 1.0.0, Release 00/00/24 Initial release
+% version 1.0.0, Release 00/00/25 Initial release
 %
 % AUTHOR 
 % Roddy Grieves
 % University of Glasgow, Sir James Black Building
 % Neuroethology and Spatial Cognition Lab
 % eMail: roddy.grieves@glasgow.ac.uk
-% Copyright 2024 Roddy Grieves
+% Copyright 2025 Roddy Grieves
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INPUTS
 %%%%%%%%%%%%%%%% ARGUMENT CHECK
-    % Default inputs
-    def_config = struct;
-
     % Parse inputs
     p = inputParser;
     addRequired(p,'in',@(x) ~isempty(x) && ~all(isnan(x(:))));  
